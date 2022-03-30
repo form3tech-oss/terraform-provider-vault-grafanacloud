@@ -1,0 +1,11 @@
+language: go
+dist: bionic
+go:
+  - 1.17.x
+script:
+  - make deps testacc lint
+deploy:
+  - provider: script
+    script: make deps release
+    on:
+      tags: true

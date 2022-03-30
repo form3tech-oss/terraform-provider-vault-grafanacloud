@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  vault:
+    image: vault:latest
+    ports:
+      - "8200:8200"
+    command: "server -dev -dev-root-token-id=root -dev-plugin-dir=/vault/plugins"
+    environment:
+      VAULT_ADDR: "http://localhost:8200"
+    volumes:
+      - ./bin/vault-plugin-secrets-grafanacloud:/vault/plugins/vault-plugin-secrets-grafanacloud
+    depends_on:
+      - consul
+  consul:
+    image: consul:latest
