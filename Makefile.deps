@@ -1,5 +1,11 @@
 .PHONY: deps
-deps: bin/goreleaser bin/tfplugindocs bin/tflint bin/terraform
+deps: bin/vault-plugin-secrets-grafanacloud bin/goreleaser bin/tfplugindocs bin/tflint bin/terraform
+
+bin/vault-plugin-secrets-grafanacloud:
+	mkdir -p bin
+	docker create --name vault-plugin-secrets-grafanacloud-download form3tech/vault-plugin-secrets-grafanacloud:v0.0.1-beta 
+	docker cp vault-plugin-secrets-grafanacloud-download:/var/lib/vault_plugins/vault-plugin-secrets-grafanacloud ./bin/vault-plugin-secrets-grafanacloud
+	docker rm vault-plugin-secrets-grafanacloud-download
 
 bin/goreleaser:
 	mkdir -p bin
