@@ -2,7 +2,7 @@ include Makefile.deps
 
 VERSION := 0.0.1
 INSTALL_DIR := ~/.terraform.d/plugins/github.com/form3tech-oss/vault-grafanacloud/$(VERSION)/linux_amd64
-BINARY := terraform-provider-vault-grafanacloud_v$(VERSION)
+BINARY := terraform-provider-vaultgrafanacloud_v$(VERSION)
 SHELL := /bin/bash
 PATH := $(PATH):$(PWD)/bin
 
