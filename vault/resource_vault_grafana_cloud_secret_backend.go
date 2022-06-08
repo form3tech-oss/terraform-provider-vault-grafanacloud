@@ -65,7 +65,7 @@ func grafanaCloudSecretBackendCreate(d *schema.ResourceData, meta interface{}) e
 		return fmt.Errorf("error mounting to %q: %s", backend, err)
 	}
 
-	log.Printf("[DEBUG] Mounted AD backend at %q", backend)
+	log.Printf("[DEBUG] Mounted vault grafana cloud backend at %q", backend)
 	d.SetId(backend)
 
 	data := map[string]interface{}{}
@@ -94,17 +94,17 @@ func grafanaCloudSecretBackendCreate(d *schema.ResourceData, meta interface{}) e
 func grafanaCloudSecretBackendDelete(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*api.Client)
 	vaultPath := d.Id()
-	log.Printf("[DEBUG] Unmounting AD backend %q", vaultPath)
+	log.Printf("[DEBUG] Unmounting vault grafana cloud backend %q", vaultPath)
 
 	err := client.Sys().Unmount(vaultPath)
 	if err != nil && strings.Contains(err.Error(), "Code: 404") {
 		log.Printf("[WARN] %q not found, removing from state", vaultPath)
 		d.SetId("")
-		return fmt.Errorf("error unmounting AD backend from %q: %s", vaultPath, err)
+		return fmt.Errorf("error unmounting vault grafana cloud backend from %q: %s", vaultPath, err)
 	} else if err != nil {
-		return fmt.Errorf("error unmounting AD backend from %q: %s", vaultPath, err)
+		return fmt.Errorf("error unmounting vault grafana cloud backend from %q: %s", vaultPath, err)
 	}
-	log.Printf("[DEBUG] Unmounted AD backend %q", vaultPath)
+	log.Printf("[DEBUG] Unmounted vault grafana cloud backend %q", vaultPath)
 	return nil
 }
 

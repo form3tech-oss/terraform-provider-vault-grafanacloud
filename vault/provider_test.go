@@ -46,6 +46,6 @@ var (
 func init() {
 	testProvider = Provider()
 	testProviders = map[string]*schema.Provider{
-		"vault": testProvider,
+		"vaultgrafanacloud": testProvider,
 	}
 }
