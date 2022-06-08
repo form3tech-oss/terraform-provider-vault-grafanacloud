@@ -35,20 +35,20 @@ func TestGrafanaCloudSecretRole(t *testing.T) {
 			{
 				Config: testGrafanaCloudSecretRole_initialConfig(backend, key, url, organisation, user, name, gcRole, ttl, maxTTL),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_role.test", "backend", backend),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_role.test", "name", name),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_role.test", "gc_role", gcRole),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_role.test", "ttl", ttl),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_role.test", "max_ttl", maxTTL),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "backend", backend),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "name", name),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "gc_role", gcRole),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "ttl", ttl),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "max_ttl", maxTTL),
 				),
 			},
 			{
 				Config: testGrafanaCloudSecretRole_updateConfig(backend, key, url, organisation, name, user, updatedGCRole, updatedTTL, updatedMaxTTL),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_role.test", "name", name),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_role.test", "gc_role", updatedGCRole),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_role.test", "ttl", updatedTTL),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_role.test", "max_ttl", updatedMaxTTL),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "name", name),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "gc_role", updatedGCRole),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "ttl", updatedTTL),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "max_ttl", updatedMaxTTL),
 				),
 			},
 		},
@@ -64,7 +64,7 @@ func testAccGrafanaCloudSecretRoleCheckDestroy(s *terraform.State) error {
 	}
 
 	for _, rs := range s.RootModule().Resources {
-		if rs.Type != "vault_grafanacloud_secret_role" {
+		if rs.Type != "vaultgrafanacloud_secret_role" {
 			continue
 		}
 		for backend, mount := range mounts {
@@ -80,7 +80,7 @@ func testAccGrafanaCloudSecretRoleCheckDestroy(s *terraform.State) error {
 
 func testGrafanaCloudSecretRole_initialConfig(backend, key, url, organisation, user, name, gcRole, ttl, maxTTL string) string {
 	return fmt.Sprintf(`
-resource "vault_grafanacloud_secret_backend" "test" {
+resource "vaultgrafanacloud_secret_backend" "test" {
 	backend = "%s"
 	key = "%s"
 	url = "%s"
@@ -88,8 +88,8 @@ resource "vault_grafanacloud_secret_backend" "test" {
 	user = "%s"
 }
 
-resource "vault_grafanacloud_secret_role" "test" {
-	backend = vault_grafanacloud_secret_backend.test.backend
+resource "vaultgrafanacloud_secret_role" "test" {
+	backend = vaultgrafanacloud_secret_backend.test.backend
 	name = "%s"
 	gc_role = "%s"
 	ttl = %v
@@ -100,7 +100,7 @@ resource "vault_grafanacloud_secret_role" "test" {
 
 func testGrafanaCloudSecretRole_updateConfig(backend, key, url, organisation, user, name, gcRole, ttl, maxTTL string) string {
 	return fmt.Sprintf(`
-resource "vault_grafanacloud_secret_backend" "test" {
+resource "vaultgrafanacloud_secret_backend" "test" {
 	backend = "%s"
 	key = "%s"
 	url = "%s"
@@ -108,8 +108,8 @@ resource "vault_grafanacloud_secret_backend" "test" {
 	user = "%s"
 }
 
-resource "vault_grafanacloud_secret_role" "test" {
-	backend = vault_grafanacloud_secret_backend.test.backend
+resource "vaultgrafanacloud_secret_role" "test" {
+	backend = vaultgrafanacloud_secret_backend.test.backend
 	name = "%s"
 	gc_role = "%s"
 	ttl = %v

@@ -29,21 +29,21 @@ func TestGrafanaCloudSecretBackend(t *testing.T) {
 			{
 				Config: testGrafanaCloudSecretBackend_initialConfig(backend, key, url, organisation, user),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_backend.test", "backend", backend),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_backend.test", "key", key),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_backend.test", "url", url),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_backend.test", "organisation", organisation),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_backend.test", "user", user),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_backend.test", "backend", backend),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_backend.test", "key", key),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_backend.test", "url", url),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_backend.test", "organisation", organisation),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_backend.test", "user", user),
 				),
 			},
 			{
 				Config: testGrafanaCloudSecretBackend_updateConfig(backend, key, url, organisation, user),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_backend.test", "backend", backend),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_backend.test", "key", key),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_backend.test", "url", url),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_backend.test", "organisation", organisation),
-					resource.TestCheckResourceAttr("vault_grafanacloud_secret_backend.test", "user", user),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_backend.test", "backend", backend),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_backend.test", "key", key),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_backend.test", "url", url),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_backend.test", "organisation", organisation),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_backend.test", "user", user),
 				),
 			},
 		},
@@ -59,7 +59,7 @@ func testAccGrafanaCloudSecretBackendCheckDestroy(s *terraform.State) error {
 	}
 
 	for _, rs := range s.RootModule().Resources {
-		if rs.Type != "vault_grafanacloud_secret_backend" {
+		if rs.Type != "vaultgrafanacloud_secret_backend" {
 			continue
 		}
 		for backend, mount := range mounts {
@@ -75,7 +75,7 @@ func testAccGrafanaCloudSecretBackendCheckDestroy(s *terraform.State) error {
 
 func testGrafanaCloudSecretBackend_initialConfig(backend, key, url, organisation, user string) string {
 	return fmt.Sprintf(`
-resource "vault_grafanacloud_secret_backend" "test" {
+resource "vaultgrafanacloud_secret_backend" "test" {
 	backend = "%s"
 	key = "%s"
 	url = "%s"
@@ -86,7 +86,7 @@ resource "vault_grafanacloud_secret_backend" "test" {
 
 func testGrafanaCloudSecretBackend_updateConfig(backend, key, url, organisation, user string) string {
 	return fmt.Sprintf(`
-resource "vault_grafanacloud_secret_backend" "test" {
+resource "vaultgrafanacloud_secret_backend" "test" {
 	backend = "%s"
 	key = "%s"
 	url = "%s"

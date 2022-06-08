@@ -35,8 +35,8 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"vault_grafanacloud_secret_backend": GrafanaCloudSecretBackendResource(),
-			"vault_grafanacloud_secret_role":    GrafanaCloudSecretRoleResource(),
+			"vaultgrafanacloud_secret_backend": GrafanaCloudSecretBackendResource(),
+			"vaultgrafanacloud_secret_role":    GrafanaCloudSecretRoleResource(),
 		},
 		ConfigureFunc: providerConfigure,
 	}

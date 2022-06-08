@@ -4,7 +4,7 @@ provider "vault-grafanacloud" {
   token   = var.vault_token
 }
 
-resource "vault_grafanacloud_secret_backend" "backend" {
+resource "vaultgrafanacloud_secret_backend" "backend" {
   backend      = "vault-grafanacloud"
   key          = var.grafana_cloud_api_key
   url          = var.grafana_cloud_api_url
@@ -12,7 +12,7 @@ resource "vault_grafanacloud_secret_backend" "backend" {
   user         = var.grafana_cloud_user
 }
 
-resource "vault_grafanacloud_secret_role" "test" {
+resource "vaultgrafanacloud_secret_role" "test" {
   backend = "vault-grafanacloud"
   name    = "viewer-role"
   gc_role = "Viewer"
