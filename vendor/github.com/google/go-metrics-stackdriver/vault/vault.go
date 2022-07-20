@@ -14,7 +14,7 @@
 
 // Package vault provides helper functions to improve the go-metrics to stackdriver metric
 // conversions specific to HashiCorp Vault.
-package vault
+package vaultgrafanacloud
 
 import "github.com/armon/go-metrics"
 

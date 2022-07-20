@@ -1,4 +1,4 @@
-package vault
+package vaultgrafanacloud
 
 import (
 	"fmt"
@@ -45,15 +45,17 @@ func GrafanaCloudSecretRoleResource() *schema.Resource {
 				Required:    true,
 				Description: "The Grafana Cloud role, i.e. the key authorization level",
 			},
-			"ttl": {
+			"ttl_seconds": {
 				Type:        schema.TypeInt,
 				Optional:    true,
-				Description: "Default lease for generated credentials",
+				Default:     300,
+				Description: "Default lease for generated credentials in seconds",
 			},
-			"max_ttl": {
+			"max_ttl_seconds": {
 				Type:        schema.TypeInt,
 				Optional:    true,
-				Description: "Maximum time for role",
+				Default:     300,
+				Description: "Maximum time for role in seconds",
 			},
 		},
 	}
@@ -71,11 +73,11 @@ func grafanaCloudSecretRoleCreate(d *schema.ResourceData, meta interface{}) erro
 	if v, ok := d.GetOkExists("gc_role"); ok {
 		data["gc_role"] = v
 	}
-	if v, ok := d.GetOkExists("ttl"); ok {
-		data["ttl"] = v
+	if v, ok := d.GetOkExists("ttl_seconds"); ok {
+		data["ttl_seconds"] = v
 	}
-	if v, ok := d.GetOkExists("max_ttl"); ok {
-		data["max_ttl"] = v
+	if v, ok := d.GetOkExists("max_ttl_seconds"); ok {
+		data["max_ttl_seconds"] = v
 	}
 
 	log.Printf("[DEBUG] Writing %q", rolePath)
@@ -142,15 +144,15 @@ func grafanaCloudSecretRoleRead(d *schema.ResourceData, meta interface{}) error 
 		}
 	}
 
-	if val, ok := resp.Data["ttl"]; ok {
-		if err := d.Set("ttl", val); err != nil {
-			return fmt.Errorf("error setting state key 'ttl': %s", err)
+	if val, ok := resp.Data["ttl_seconds"]; ok {
+		if err := d.Set("ttl_seconds", val); err != nil {
+			return fmt.Errorf("error setting state key 'ttl_seconds': %s", err)
 		}
 	}
 
-	if val, ok := resp.Data["max_ttl"]; ok {
-		if err := d.Set("max_ttl", val); err != nil {
-			return fmt.Errorf("error setting state key 'max_ttl': %s", err)
+	if val, ok := resp.Data["max_ttl_seconds"]; ok {
+		if err := d.Set("max_ttl_seconds", val); err != nil {
+			return fmt.Errorf("error setting state key 'max_ttl_seconds': %s", err)
 		}
 	}
 	return nil
@@ -165,11 +167,11 @@ func grafanaCloudSecretRoleUpdate(d *schema.ResourceData, meta interface{}) erro
 	if raw, ok := d.GetOk("gc_role"); ok {
 		data["gc_role"] = raw
 	}
-	if raw, ok := d.GetOk("ttl"); ok {
-		data["ttl"] = raw
+	if raw, ok := d.GetOk("ttl_seconds"); ok {
+		data["ttl_seconds"] = raw
 	}
-	if raw, ok := d.GetOk("max_ttl"); ok {
-		data["max_ttl"] = raw
+	if raw, ok := d.GetOk("max_ttl_seconds"); ok {
+		data["max_ttl_seconds"] = raw
 	}
 	if _, err := client.Logical().Write(rolePath, data); err != nil {
 		return fmt.Errorf("error updating template auth backend role %q: %s", rolePath, err)

@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/form3tech-oss/terraform-provider-vault-grafanacloud/vault"
+	"github.com/form3tech-oss/terraform-provider-vault-grafanacloud/vaultgrafanacloud"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 )
 
@@ -14,7 +14,7 @@ func main() {
 	flag.Parse()
 
 	plugin.Serve(&plugin.ServeOpts{
-		ProviderFunc: vault.Provider,
+		ProviderFunc: vaultgrafanacloud.Provider,
 		Debug:        debugMode,
 	})
 }

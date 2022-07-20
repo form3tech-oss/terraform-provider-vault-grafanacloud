@@ -1,4 +1,4 @@
-package vault
+package vaultgrafanacloud
 
 import (
 	"fmt"
@@ -38,8 +38,8 @@ func TestGrafanaCloudSecretRole(t *testing.T) {
 					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "backend", backend),
 					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "name", name),
 					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "gc_role", gcRole),
-					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "ttl", ttl),
-					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "max_ttl", maxTTL),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "ttl_seconds", ttl),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "max_ttl_seconds", maxTTL),
 				),
 			},
 			{
@@ -47,8 +47,8 @@ func TestGrafanaCloudSecretRole(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "name", name),
 					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "gc_role", updatedGCRole),
-					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "ttl", updatedTTL),
-					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "max_ttl", updatedMaxTTL),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "ttl_seconds", updatedTTL),
+					resource.TestCheckResourceAttr("vaultgrafanacloud_secret_role.test", "max_ttl_seconds", updatedMaxTTL),
 				),
 			},
 		},
@@ -92,8 +92,8 @@ resource "vaultgrafanacloud_secret_role" "test" {
 	backend = vaultgrafanacloud_secret_backend.test.backend
 	name = "%s"
 	gc_role = "%s"
-	ttl = %v
-	max_ttl = %v
+	ttl_seconds = %v
+	max_ttl_seconds = %v
 }
 `, backend, key, url, organisation, user, name, gcRole, ttl, maxTTL)
 }
@@ -112,7 +112,7 @@ resource "vaultgrafanacloud_secret_role" "test" {
 	backend = vaultgrafanacloud_secret_backend.test.backend
 	name = "%s"
 	gc_role = "%s"
-	ttl = %v
-	max_ttl = %v
+	ttl_seconds = %v
+	max_ttl_seconds = %v
 }`, backend, key, url, organisation, name, user, gcRole, ttl, maxTTL)
 }
