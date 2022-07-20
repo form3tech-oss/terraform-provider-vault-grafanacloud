@@ -8,4 +8,4 @@ To test the terraform provider, you will need to perform some set-up steps.
 
 1. Compile the [vault-plugin-secrets-grafanacloud](https://github.com/form3tech-oss/vault-plugin-secrets-grafanacloud) plugin and copy to `./bin/`.
 2. Run `docker-compose up -d`
-3. Run `make test`
+3. Run `TF_ACC=1 VAULT_ADDR=http://localhost:8200 VAULT_TOKEN=root make test`
