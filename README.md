@@ -33,7 +33,17 @@ The `vaultgrafanacloud_secret_backend` resource mounts the [vault-plugin-secrets
 | `key` | `true` | Grafana Cloud API key with Admin role to create user keys | N/A |
 | `url` | `true` | The URL for the Grafana Cloud API | N/A |
 | `organisation` | `true` | The Organisation slug for the Grafana Cloud API" | N/A |
-| `user` | `true` | The User that is needed to interact with prometheus, if set this is returned alongside every issued credential | N/A |
+| `user` | `false` | (Deprecated) The User that is needed to interact with prometheus, if set this is returned alongside every issued credential | N/A |
+| `prometheus_user` | `false` | The user ID that is used to authenticate with the grafana cloud prometheus endpoint. There is only one of these per stack see the grafana cloud stack dashboard for more details. | N/A |
+| `prometheus_url` | `false` | The URL at which Prometheus can be accessed. There is only one of these per stack see the grafana cloud stack dashboard for more details. | N/A |
+| `loki_user` | `false` | The user ID that is used to authenticate with the grafana cloud loki endpoint. There is only one of these per stack see the grafana cloud stack dashboard for more details. | N/A |
+| `loki_url` | `false` | The URL at which Loki can be accessed. There is only one of these per stack see the grafana cloud stack dashboard for more details. | N/A |
+| `tempo_user` | `false` | The user ID that is used to authenticate with the grafana cloud tempo endpoint. There is only one of these per stack see the grafana cloud stack dashboard for more details. | N/A |
+| `tempo_url` | `false` | The URL at which Tempo can be accessed. There is only one of these per stack see the grafana cloud stack dashboard for more details. | N/A |
+| `alertmanager_user` | `false` | The user ID that is used to authenticate with the grafana cloud alertmanager endpoint. There is only one of these per stack see the grafana cloud stack dashboard for more details. | N/A |
+| `alertmanager_url` | `false` | The URL at which Alertmanager can be accessed. There is only one of these per stack see the grafana cloud stack dashboard for more details. | N/A |
+| `graphite_user` | `false` | The user ID that is used to authenticate with the grafana cloud graphite endpoint. There is only one of these per stack see the grafana cloud stack dashboard for more details. | N/A |
+| `graphite_url` | `false` | The URL at which Graphite can be accessed. There is only one of these per stack see the grafana cloud stack dashboard for more details. | N/A |
 
 ### `vaultgrafanacloud_secret_role`
 

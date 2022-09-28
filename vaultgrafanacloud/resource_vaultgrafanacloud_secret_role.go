@@ -70,13 +70,13 @@ func grafanaCloudSecretRoleCreate(d *schema.ResourceData, meta interface{}) erro
 	log.Printf("[DEBUG] Creating %q", rolePath)
 
 	data := map[string]interface{}{}
-	if v, ok := d.GetOkExists("gc_role"); ok {
+	if v, ok := d.GetOk("gc_role"); ok {
 		data["gc_role"] = v
 	}
-	if v, ok := d.GetOkExists("ttl_seconds"); ok {
+	if v, ok := d.GetOk("ttl_seconds"); ok {
 		data["ttl_seconds"] = v
 	}
-	if v, ok := d.GetOkExists("max_ttl_seconds"); ok {
+	if v, ok := d.GetOk("max_ttl_seconds"); ok {
 		data["max_ttl_seconds"] = v
 	}
 
