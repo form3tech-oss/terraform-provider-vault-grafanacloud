@@ -43,7 +43,7 @@ install: test build
 	cp bin/$(BINARY) $(INSTALL_DIR)/
 
 release:
-	goreleaser
+	./bin/goreleaser
 
 docs:
 	tfplugindocs generate
